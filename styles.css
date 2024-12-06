@@ -66,23 +66,25 @@ header .menu-toggle {
     font-size: 3em;
 }
 
-.about, .services, .contact {
+.about, .financial-education, .social-initiatives, .environmental-solutions, .join-me {
     padding: 4em 0;
     text-align: center;
 }
 
-.about img {
+.about img, .financial-education img, .social-initiatives img, .environmental-solutions img {
     width: 50%;
     height: auto;
     margin-top: 1em;
 }
 
-.services ul {
-    list-style: none;
-    padding: 0;
+.content {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
 }
 
-.services ul li {
+.item {
+    width: 30%;
     background: #e7e7e7;
     margin: 1em 0;
     padding: 1em;
