@@ -1,145 +1,72 @@
-/* Reset some basic styles */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+/* Custom Animations and Styles */
+@keyframes typing {
+    from { width: 0; }
+    to { width: 100%; }
 }
 
-body {
-  font-family: 'Arial', sans-serif;
-  line-height: 1.6;
-  background-color: #f4f4f4;
-  color: #333;
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
 }
 
-a {
-  text-decoration: none;
-  color: inherit;
+.typing-animation {
+    overflow: hidden;
+    white-space: nowrap;
+    animation: typing 2s steps(20, end);
 }
 
-header {
-  background-color: #333;
-  color: #fff;
-  padding: 15px 0;
-  position: sticky;
-  top: 0;
-  z-index: 1000;
+.fade-in-text {
+    opacity: 0;
+    animation: fadeIn 2s forwards;
+    animation-delay: 2s;
 }
 
-nav {
-  display: flex;
-  justify-content: center;
+.skills-container {
+    margin-top: 20px;
 }
 
-nav .logo a {
-  text-decoration: none;
-  color: #fff;
-  font-size: 28px;
-  font-weight: bold;
-  letter-spacing: 1px;
+.skill-bar {
+    background-color: #f3f4f6;
+    border-radius: 5px;
+    margin-bottom: 10px;
 }
 
-main {
-  padding: 40px 20px;
-  text-align: center;
+.skill-name {
+    font-weight: bold;
+    padding: 5px;
+    background-color: #e5e7eb;
+    border-radius: 5px 0 0 5px;
+    display: inline-block;
+    width: 200px;
 }
 
-h2 {
-  font-size: 32px;
-  color: #333;
-  margin-bottom: 20px;
+.skill-progress {
+    height: 30px;
+    background-color: #3b82f6;
+    border-radius: 0 5px 5px 0;
+    transition: width 1.5s ease-in-out;
+    width: 0;
 }
 
-.contact-details {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 30px;
-}
+/* Responsive Mobile Menu */
+@media (max-width: 768px) {
+    .nav-links {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background-color: white;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
 
-.contact-details__row {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
+    .nav-links.active {
+        display: flex;
+    }
 
-.contact-details__row svg {
-  fill: #1e90ff;
-  margin-right: 10px;
-}
-
-.contact-details__email a {
-  color: #1e90ff;
-  font-weight: bold;
-  font-size: 16px;
-}
-
-.contact-details__location,
-.contact-details__email,
-.contact-details__hours {
-  font-size: 16px;
-}
-
-.contact-details__hours h3 {
-  font-size: 20px;
-  color: #333;
-  margin-bottom: 10px;
-}
-
-.hours-list {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-.hours-list__item {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 8px;
-}
-
-.hours-list__item span {
-  font-size: 16px;
-  font-weight: 500;
-}
-
-footer {
-  background-color: #333;
-  color: #fff;
-  padding: 20px 0;
-  text-align: center;
-}
-
-footer ul {
-  display: flex;
-  justify-content: center;
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-footer ul li {
-  margin: 0 15px;
-}
-
-.sb-footer__social-link {
-  color: #fff;
-  font-size: 18px;
-  transition: color 0.3s ease;
-}
-
-.sb-footer__social-link:hover {
-  color: #1e90ff;
-}
-
-/* Animations for AOS */
-[data-aos="fade-up"] {
-  opacity: 0;
-  transform: translateY(30px);
-}
-
-[data-aos="fade-up"].aos-animate {
-  opacity: 1;
-  transform: translateY(0);
-  transition: all 0.6s ease-out;
+    .nav-links a {
+        padding: 10px;
+        border-bottom: 1px solid #eee;
+    }
 }
