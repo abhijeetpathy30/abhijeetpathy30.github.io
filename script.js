@@ -1,38 +1,62 @@
-// AOS (Animate on Scroll) Initialization
 document.addEventListener('DOMContentLoaded', () => {
-  AOS.init({
-    duration: 1000,
-    easing: 'ease-in-out',
-    once: true,
-  });
+    // Mobile Menu Toggle
+    const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
+    const navLinks = document.querySelector('.nav-links');
 
-  // Toggle visibility of contact information
-  const contactButton = document.querySelector('.contact-toggle');
-  const contactDetails = document.querySelector('.contact-details');
-
-  if (contactButton && contactDetails) {
-    contactButton.addEventListener('click', () => {
-      contactDetails.classList.toggle('hidden');
+    mobileMenuToggle.addEventListener('click', () => {
+        navLinks.classList.toggle('active');
+        mobileMenuToggle.classList.toggle('change');
     });
-  }
 
-  // Add smooth scroll effect to anchors
-  const scrollLinks = document.querySelectorAll('a[href^="#"]');
-  scrollLinks.forEach(link => {
-    link.addEventListener('click', e => {
-      e.preventDefault();
-
-      const targetId = link.getAttribute('href').substring(1);
-      const targetElement = document.getElementById(targetId);
-
-      if (targetElement) {
-        window.scrollTo({
-          top: targetElement.offsetTop - 50, // Offset for header
-          behavior: 'smooth',
+    // Smooth Scrolling
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            document.querySelector(this.getAttribute('href')).scrollIntoView({
+                behavior: 'smooth'
+            });
         });
-      }
     });
-  });
 
-  console.log("Page loaded and AOS initialized");
+    // Skill Progress Animation
+    const skillProgresses = document.querySelectorAll('.skill-progress');
+    
+    const observerOptions = {
+        threshold: 0.5
+    };
+
+    const skillObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const progress = entry.target.getAttribute('data-progress');
+                entry.target.style.width = `${progress}%`;
+                observer.unobserve(entry.target);
+            }
+        });
+    }, observerOptions);
+
+    skillProgresses.forEach(progress => {
+        skillObserver.observe(progress);
+    });
+
+    // Contact Form Submission
+    const contactForm = document.getElementById('contact-form');
+    
+    contactForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        
+        const name = document.getElementById('name').value;
+        const email = document.getElementById('email').value;
+        const message = document.getElementById('message').value;
+
+        // Simple form validation
+        if (!name || !email || !message) {
+            alert('Please fill in all fields');
+            return;
+        }
+
+        // Here you would typically send the form data to a backend
+        alert(`Thank you, ${name}! Your message has been received.`);
+        contactForm.reset();
+    });
 });
