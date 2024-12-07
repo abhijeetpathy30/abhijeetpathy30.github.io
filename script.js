@@ -1,36 +1,38 @@
-$(document).ready(function() {
-    console.log("Page loaded");
+// AOS (Animate on Scroll) Initialization
+document.addEventListener('DOMContentLoaded', () => {
+  AOS.init({
+    duration: 1000,
+    easing: 'ease-in-out',
+    once: true,
+  });
 
-    // Smooth scrolling for anchor links
-    $('a[href*="#"]').on('click', function(event) {
-        event.preventDefault();
+  // Toggle visibility of contact information
+  const contactButton = document.querySelector('.contact-toggle');
+  const contactDetails = document.querySelector('.contact-details');
 
-        $('html, body').animate({
-            scrollTop: $($.attr(this, 'href')).offset().top
-        }, 500);
+  if (contactButton && contactDetails) {
+    contactButton.addEventListener('click', () => {
+      contactDetails.classList.toggle('hidden');
     });
+  }
 
-    // Simple form validation
-    $('form').on('submit', function(event) {
-        let isValid = true;
+  // Add smooth scroll effect to anchors
+  const scrollLinks = document.querySelectorAll('a[href^="#"]');
+  scrollLinks.forEach(link => {
+    link.addEventListener('click', e => {
+      e.preventDefault();
 
-        $(this).find('input, textarea').each(function() {
-            if ($(this).val().trim() === '') {
-                isValid = false;
-                $(this).css('border', '1px solid red');
-            } else {
-                $(this).css('border', '1px solid #ccc');
-            }
+      const targetId = link.getAttribute('href').substring(1);
+      const targetElement = document.getElementById(targetId);
+
+      if (targetElement) {
+        window.scrollTo({
+          top: targetElement.offsetTop - 50, // Offset for header
+          behavior: 'smooth',
         });
-
-        if (!isValid) {
-            event.preventDefault();
-            alert('Please fill out all fields.');
-        }
+      }
     });
+  });
 
-    // Responsive navigation menu
-    $('.menu-toggle').on('click', function() {
-        $('nav ul').toggleClass('open');
-    });
+  console.log("Page loaded and AOS initialized");
 });
